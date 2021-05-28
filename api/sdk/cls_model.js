@@ -20,7 +20,7 @@ function amax(res_arr){
     if(argmax(cls_data) == 1){
         label = "Over Voltage"
     }
-    if(argmax(cls_data) == 0){
+    if(argmax(cls_data) == 2){
         label = "Drop Voltage"
     }
     return label
