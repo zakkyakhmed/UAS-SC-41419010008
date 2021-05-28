@@ -26,7 +26,7 @@ function amax(res_arr){
     return label
 }
 
-async function predict(data){
+async function classify(data){
     let in_dim = 4;
     
     data = normalized(data);
@@ -39,11 +39,11 @@ async function predict(data){
         const path = 'https://raw.githubusercontent.com/zendi014/bot-jst/main/public/cls_model/model.json';
         const model = await tf.loadGraphModel(path);
         
-        predict = model.predict(
+        cls = model.predict(
                 tf_data
         );
 
-        result = predict.dataSync();
+        result = cls.dataSync();
         return amax(result); 
     }catch(e){
       console.log(e);
@@ -51,6 +51,6 @@ async function predict(data){
 }
 
 module.exports = {
-    predict: predict 
+    classify: classify 
 }
   
