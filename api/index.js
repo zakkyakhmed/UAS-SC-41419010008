@@ -21,6 +21,15 @@ bot.onText(/\/start/, (msg) => {
     );   
 });
 
+// input requires i and r
+state = 0;
+bot.onText(/\/predict/, (msg) => { 
+    bot.sendMessage(
+        msg.chat.id,
+        `masukan nilai i|v contohnya 9|9`
+    );   
+    state = 1;
+});
 
 bot.on('message', (msg) => {
     if(state == 1){
@@ -34,40 +43,32 @@ bot.on('message', (msg) => {
                 r
             ]
         ).then((jres1)=>{
-            cls_model.classify([
-                i, r, parseFloat(jres1[0]), parseFloat(jres1[1])
-            ]).then((jres2)=>{
+            cls_model.predict(
+                [
+                    i, // string to float
+                    r,
+                    parseFloat(jres1[0]),
+                    parseFloat(jres1[1])
+                ]
+            ).then((jres2)=>{
                 bot.sendMessage(
-                        msg.chat.id,
-                        `nilai v yang diprediksi adalah ${jres1[0]} volt`
+                    msg.chat.id,
+                    `nilai v yang diprediksi adalah ${jres1[0]} volt`
                 ); 
                 bot.sendMessage(
-                        msg.chat.id,
-                        `nilai p yang diprediksi adalah ${jres1[1]} watt`
+                    msg.chat.id,
+                    `nilai p yang diprediksi adalah ${jres1[1]} watt`
                 ); 
                 bot.sendMessage(
-                        msg.chat.id,
-                        `Klasifikasi Tegangan: ${jres2}`
-                ); 
+                    msg.chat.id,
+                    `Klasifikasi Tegangan :  ${jres2}`
+                );
             })
-            
         })
     }else{
         state = 0 
     }
 })
-
-// input requires i and r
-state = 0;
-bot.onText(/\/predict/, (msg) => { 
-    bot.sendMessage(
-        msg.chat.id,
-        `masukan nilai i|v contohnya 9|9`
-    );   
-    state = 1;
-});
-
-
 
 // routers
 r.get('/predict/:i/:r', function(req, res, next) {    
@@ -76,11 +77,12 @@ r.get('/predict/:i/:r', function(req, res, next) {
             parseFloat(req.params.i), // string to float
             parseFloat(req.params.r)
         ]
-).then((jres)=>{
+    ).then((jres)=>{
         res.json(jres);
-})
-    
-    
+    })
+});
+
+// routers
 r.get('/classify/:i/:r', function(req, res, next) {    
     model.predict(
         [
@@ -88,14 +90,17 @@ r.get('/classify/:i/:r', function(req, res, next) {
             parseFloat(req.params.r)
         ]
     ).then((jres1)=>{
-        cls_model.classify([
-                i, r, parseFloat(jres1[0]), parseFloat(jres1[1])
-        ]).then((jres2)=>{
-                res.json(jres2);
+        cls_model.predict(
+            [
+                parseFloat(req.params.i), // string to float
+                parseFloat(req.params.r),
+                parseFloat(jres1[0]),
+                parseFloat(jres1[1])
+            ]
+        ).then((jres2)=>{
+            res.json(jres2)
         })
     })
-})
-    
- 
-    
+});
+
 module.exports = r;
