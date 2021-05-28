@@ -43,7 +43,7 @@ bot.on('message', (msg) => {
                 r
             ]
         ).then((jres1)=>{
-            cls_model.predict(
+            cls_model.classify(
                 [
                     i, // string to float
                     r,
@@ -90,7 +90,7 @@ r.get('/classify/:i/:r', function(req, res, next) {
             parseFloat(req.params.r)
         ]
     ).then((jres1)=>{
-        cls_model.predict(
+        cls_model.classify(
             [
                 parseFloat(req.params.i), // string to float
                 parseFloat(req.params.r),
