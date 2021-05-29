@@ -44,6 +44,7 @@ bot.on('message', (msg) => {
         ).then((jres1)=>{
             v = jres1[0]
             p = jres1[1]
+            console.log(v, p);
             
             cls_model.classify([i, r, parseFloat(v), parseFloat(p)]).then((jres2)=>{
                 bot.sendMessage(
