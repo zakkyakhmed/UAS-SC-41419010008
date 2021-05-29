@@ -42,10 +42,10 @@ bot.on('message', (msg) => {
                 r
             ]
         ).then((jres1)=>{
-            v = parseFloat(jres1[0])
-            p = parseFloat(jres1[1])
+            v = jres1[0]
+            p = jres1[1]
             
-            cls_model.classify([i, r, v, p]).then((jres2)=>{
+            cls_model.classify([i, r, parseFloat(v), parseFloat(p)]).then((jres2)=>{
                 bot.sendMessage(
                         msg.chat.id,
                         `nilai v yang diprediksi adalah ${v} volt`
