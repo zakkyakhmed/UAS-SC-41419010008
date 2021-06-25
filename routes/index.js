@@ -2,11 +2,19 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/:i/:r/:sel', function(req, res, next) {
+let i = 0;
+let r = 0;
+router.get('set/:i/:r/', function(req, res, next) {
+  i = req.params.i;
+  r = req.params.r;
+  res.redirect(`/api/classify/${i}/${r}`)
+});
+
+router.get('/:sel', function(req, res, next) {
   if(req.params.sel == "p"){
     res.render('index', { title: 'DNNJS' });
   }else{
-    res.redirect(`/api/classify/${req.params.i}/${req.params.r}`)
+    res.redirect(`/api/classify/${i}/${r}`)
   }
 });
 
