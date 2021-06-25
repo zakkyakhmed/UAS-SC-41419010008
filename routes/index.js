@@ -12,7 +12,14 @@ router.get('/set/:i/:r/', function(req, res, next) {
 
 router.get('/:sel', function(req, res, next) {
   if(req.params.sel == "p"){
-    res.render('index', { title: 'DNNJS' });
+    res.render(
+      'index', 
+      { 
+        title: 'DNNJS',
+        i: i,
+        r: r
+      }
+    );
   }else{
     res.redirect(`/api/classify/${i}/${r}`)
   }
