@@ -7,7 +7,15 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-
+    
+    
+    <span>
+        Retrieve I = <span id="i"><%= i %></span> Ampere
+    </span><br/>
+    <span>
+        Retrieve R = <span id="r"><%= r %></span> Ohm
+    </span><br/>
+    
     <span>
         Predicted V = <span id="v">**</span> Volt
     </span><br/>
@@ -22,10 +30,13 @@
     
     <script>
         const path = window.location.pathname;
-		    const url_var= path.split('/');
+	const url_var= path.split('/');
 
         setInterval(function(){ 
-          $.get(`/api/classify/${url_var[1]}/${url_var[2]}`).done(function(dt){
+          let i = $("#i").text();
+	  let r = $("#r").text();
+	  
+          $.get(`/api/classify/${i}/${r}`).done(function(dt){
               
               $("#v").text(dt['jres'][0])
               $("#p").text(dt['jres'][1])
