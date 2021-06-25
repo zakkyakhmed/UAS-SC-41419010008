@@ -7,5 +7,37 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-  </body>
+
+    <span>
+        Predicted V = <span id="v">**</span> Volt
+    </span><br/>
+    <span>
+        Predicted P = <span id="p">**</span> Watt
+    </span><br/>
+    <span>
+        Labels = <span id="l">**</span>
+    </span>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <script>
+        const path = window.location.pathname;
+		    const url_var= path.split('/');
+
+        setInterval(function(){ 
+          $.get(`/api/classify/${url_var[1]}/${url_var[2]}`).done(function(dt){
+              
+              $("#v").text(dt['jres'][0])
+              $("#p").text(dt['jres'][1])
+              $("#l").text(dt['jres_'])
+
+              console.log(dt['jres'])
+              console.log(dt['jres_'])
+          });
+        }, 5000);
+
+    </script>
+  
+
+</body>
 </html>
