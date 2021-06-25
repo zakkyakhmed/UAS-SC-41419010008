@@ -28,12 +28,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     
-    <script>
-        const path = window.location.pathname;
-	const url_var= path.split('/');
-
-        setInterval(function(){ 
-          let i = $("#i").text();
+    <script>	
+	function classify(){
+	  let i = $("#i").text();
 	  let r = $("#r").text();
 	  
           $.get(`/api/classify/${i}/${r}`).done(function(dt){
@@ -45,6 +42,12 @@
               console.log(dt['jres'])
               console.log(dt['jres_'])
           });
+	}
+	
+	classify();
+	
+        setInterval(function(){ 
+        	classify();
         }, 5000);
 
     </script>
