@@ -66,6 +66,19 @@ bot.on('message', (msg) => {
     }
 })
 
+
+r.get('test/:param', function(req, res, next){
+    bot.on('message', (msg) => {
+        bot.sendMessage(
+            msg.chat.id,
+            `${req.param}`
+        );  
+    });
+    
+    res.json(req.param);
+});
+
+
 // routers
 r.get('/predict/:i/:r', function(req, res, next) {    
     model.predict(
