@@ -67,7 +67,7 @@ bot.on('message', (msg) => {
 })
 
 
-r.get('test/:param', function(req, res, next){
+r.get('/test/:param', function(req, res, next){
     bot.on('message', (msg) => {
         bot.sendMessage(
             msg.chat.id,
