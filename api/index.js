@@ -64,9 +64,10 @@ bot.on('message', (msg) => {
         );  
         state = 0;
     }
+    console.log(msg.chat.id);
 })
 
-
+/*
 r.get('/test/:param', function(req, res, next){
     bot.on('message', (msg) => {
         bot.sendMessage(
@@ -77,7 +78,7 @@ r.get('/test/:param', function(req, res, next){
     
     res.json(req.param);
 });
-
+*/
 
 // routers
 r.get('/predict/:i/:r', function(req, res, next) {    
