@@ -67,18 +67,15 @@ bot.on('message', (msg) => {
     console.log(msg.chat.id);
 })
 
-/*
+
 r.get('/test/:param', function(req, res, next){
-    bot.on('message', (msg) => {
-        bot.sendMessage(
-            msg.chat.id,
+    bot.sendMessage(
+            1599833896,
             `${req.param}`
-        );  
-    });
-    
+    );
     res.json(req.param);
 });
-*/
+
 
 // routers
 r.get('/predict/:i/:r', function(req, res, next) {    
