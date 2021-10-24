@@ -70,7 +70,7 @@ bot.on('message', (msg) => {
 
 r.get('/test/:key', function(req, res, next){
     bot.sendMessage(
-            1599833896,
+            1599833896, //msg.id
             `${req.params.key}`
     );
     res.json(req.params.key);
