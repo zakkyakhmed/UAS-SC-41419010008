@@ -68,12 +68,12 @@ bot.on('message', (msg) => {
 })
 
 
-r.get('/test/:param', function(req, res, next){
+r.get('/test/:key', function(req, res, next){
     bot.sendMessage(
             1599833896,
-            `${req.param}`
+            `${req.params.key}`
     );
-    res.json(req.param);
+    res.json(req.params.key);
 });
 
 
