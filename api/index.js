@@ -78,6 +78,7 @@ r.get('/test/:key', function(req, res, next){
 
 
 // routers
+// use => ...../api/predict/10/20
 r.get('/predict/:i/:r', function(req, res, next) {    
     model.predict(
         [
@@ -85,11 +86,17 @@ r.get('/predict/:i/:r', function(req, res, next) {
             parseFloat(req.params.r)
         ]
     ).then((jres)=>{
-        res.json(jres);
+        bot.sendMessage(
+                1599833896, //msg.id
+                `${jres}`
+        ); // to telegram
+        
+        res.json(jres); // to pc / arduino
     })
 });
 
 // routers
+// use => ...../api/classify/10/20
 r.get('/classify/:i/:r', function(req, res, next) {    
     model.predict(
         [
@@ -105,6 +112,11 @@ r.get('/classify/:i/:r', function(req, res, next) {
                 parseFloat(jres[1])
             ]
         ).then((jres_)=>{
+            bot.sendMessage(
+                    1599833896, //msg.id
+                    `${jres}`
+            ); // to telegram
+            
             res.json({jres, jres_})
         })
     })
