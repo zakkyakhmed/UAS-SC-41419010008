@@ -88,7 +88,7 @@ r.get('/predict/:i/:r', function(req, res, next) {
     ).then((jres)=>{
         bot.sendMessage(
                 1599833896, //msg.id
-                `${jres}`
+                `${jres[0]}|${jres[1]}`
         ); // to telegram
         
         res.json(jres); // to pc / arduino
@@ -114,7 +114,7 @@ r.get('/classify/:i/:r', function(req, res, next) {
         ).then((jres_)=>{
             bot.sendMessage(
                     1599833896, //msg.id
-                    `${jres}`
+                    `${jres_}`
             ); // to telegram
             
             res.json({jres, jres_})
